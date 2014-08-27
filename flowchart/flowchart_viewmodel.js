@@ -12,7 +12,12 @@ var flowchart = {
 	//
 	// Width of a node.
 	//
-	flowchart.nodeWidth = 250;
+	flowchart.nodeWidth = 50;
+
+	//
+	// Worker node Radius
+	//
+	flowchart.nodeRadii = 50;
 
 	//
 	// Amount of space reserved for displaying the node's name.
@@ -22,7 +27,7 @@ var flowchart = {
 	//
 	// Height of a connector in a node.
 	//
-	flowchart.connectorHeight = 35;
+	flowchart.connectorHeight = 10;
 
 	//
 	// Compute the Y coordinate of a connector, given its index.
@@ -136,6 +141,14 @@ var flowchart = {
 		this.width = function () {
 			return flowchart.nodeWidth;
 		}
+
+		//
+		// Radii of the worker ndoe.
+		//
+		this.radii = function () {
+			return flowchart.nodeRadii;
+                }
+
 
 		//
 		// Height of the node.

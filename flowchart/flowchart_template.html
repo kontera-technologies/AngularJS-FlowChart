@@ -26,26 +26,22 @@
     </linearGradient>
   </defs>
   <g
-    ng-repeat="node in chart.nodes"
-    ng-mousedown="nodeMouseDown($event, node)"
+    ng-repeat="node in chart.nodes | worker" 
     ng-attr-transform="translate({{node.x()}}, {{node.y()}})"
     >
-    <rect 
-      ng-attr-class="{{node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect')}}"
-      ry="10" 
-      rx="10" 
-      x="0" 
-      y="0" 
-      ng-attr-width="{{node.width()}}" 
-      ng-attr-height="{{node.height()}}" 
-      fill="url(#nodeBackgroundGradient)"
-      >
 
-    </rect>
+      <circle       
+	ng-attr-class="{{node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect')}}"
+        ng-attr-r="{{node.radii()}}" 
+        ng-attr-cx="{{node.width()}}"
+        ng-attr-cy="{{node.width()}}"
+	fill="url(#nodeBackgroundGradient)"
+	stroke="#000000"
+        />
 
     <text
-      ng-attr-x="{{node.width()/2}}"
-      y="25"
+      ng-attr-x="{{node.width()}}"
+      y="{{node.width()}}"
       text-anchor="middle"
       alignment-baseline="middle"
       >
@@ -54,17 +50,61 @@
 
     <g
       ng-repeat="connector in node.inputConnectors"
-      ng-mousedown="connectorMouseDown($event, node, connector, $index, true)"
       class="connector input-connector"
       >
-      <text
-        ng-attr-x="{{connector.x() + 20}}"
-        ng-attr-y="{{connector.y()}}"
-        text-anchor="left"
-        alignment-baseline="middle"
-        >
-        {{connector.name()}}
-      </text>
+          
+      <circle       
+        ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
+        ng-attr-r="{{connectorSize}}" 
+        ng-attr-cx="{{connector.x()}}"
+        ng-attr-cy="{{connector.y()}}"
+        />
+    </g>
+
+    <g
+      ng-repeat="connector in node.outputConnectors"
+      class="connector output-connector"
+      >
+      
+      <circle             
+        ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
+        ng-attr-r="{{connectorSize}}" 
+        ng-attr-cx="{{connector.x()}}"
+        ng-attr-cy="{{connector.y()}}"
+        />
+    </g>
+  </g>
+
+<g
+    ng-repeat="node in chart.nodes | sink"
+    ng-attr-transform="translate({{node.x()}}, {{node.y()}})"
+    >
+    
+    <polygon 
+	points="0,50 70,0 140,50 70,100"
+	ng-attr-class="{{node.selected() && 'selected-node-rect' || (node == mouseOverNode && 'mouseover-node-rect' || 'node-rect')}}"
+	ng-attr-width="{{node.width()}}" 
+	ng-attr-height="{{node.height()}}" 	
+	fill="url(#nodeBackgroundGradient)"
+	stroke="#000000"
+      >
+      </polygon>
+
+    </rect>
+
+    <text
+      ng-attr-x="{{node.width()+20}}"
+      y="{{node.width()}}"
+      text-anchor="middle"
+      alignment-baseline="middle"
+      >
+      {{node.name()}}
+    </text>
+
+    <g
+      ng-repeat="connector in node.inputConnectors"
+      class="connector input-connector"
+      >
       
       <circle       
         ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"
@@ -76,17 +116,8 @@
 
     <g
       ng-repeat="connector in node.outputConnectors"
-      ng-mousedown="connectorMouseDown($event, node, connector, $index, false)"
       class="connector output-connector"
       >
-      <text
-        ng-attr-x="{{connector.x() - 20}}"
-        ng-attr-y="{{connector.y()}}"
-        text-anchor="end"
-        alignment-baseline="middle"
-        >
-        {{connector.name()}}
-      </text>
 
       <circle             
         ng-attr-class="{{connector == mouseOverConnector && 'mouseover-connector-circle' || 'connector-circle'}}"

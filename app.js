@@ -4,6 +4,30 @@
 //
 angular.module('app', ['flowChart', ])
 
+.filter('worker', function() {
+    return function(nodes, uppercase) {
+        var out = [];
+        for (var i = 0; i < nodes.length; i++) {
+            if(nodes[i].data.type == "worker"){
+                out.push(nodes[i]);
+            }
+        }
+        return out;
+    }
+})
+
+.filter('sink', function() {
+    return function(nodes, uppercase) {
+        var out = [];
+        for (var i = 0; i < nodes.length; i++) {
+            if(nodes[i].data.type == "sink"){
+                out.push(nodes[i]);
+            }
+        }
+        return out;
+    }
+})
+
 //
 // Simple service to create a prompt.
 //
@@ -61,7 +85,8 @@ angular.module('app', ['flowChart', ])
 
 		nodes: [
 			{
-				name: "Example Node 1",
+				name: "url-sifter",
+				type: "worker",
 				id: 0,
 				x: 0,
 				y: 0,
@@ -90,10 +115,28 @@ angular.module('app', ['flowChart', ])
 			},
 
 			{
-				name: "Example Node 2",
+				name: "sifter_kontera",
+				type: "sink",
+				id: 1,
+				x: 200,
+				y: 0,
+				inputConnectors: [
+					{
+						name: "A",
+					}
+				],
+				outputConnectors: [
+					{
+						name: "A",
+					}
+				],
+			},
+{
+				name: "url-content-fetcher",
+				type: "worker",
 				id: 1,
 				x: 400,
-				y: 200,
+				y: 0,
 				inputConnectors: [
 					{
 						name: "A",
@@ -117,6 +160,23 @@ angular.module('app', ['flowChart', ])
 					},
 				],
 			},
+			{
+				name: "fetcher_kontera",
+				type: "sink",
+				id: 1,
+				x: 600,
+				y: 0,
+				inputConnectors: [
+					{
+						name: "A",
+					}
+				],
+				outputConnectors: [
+					{
+						name: "A",
+					}
+				],
+			},
 
 		],
 
@@ -124,12 +184,12 @@ angular.module('app', ['flowChart', ])
 			{
 				source: {
 					nodeID: 0,
-					connectorIndex: 1,
+					connectorIndex: 0,
 				},
 
 				dest: {
 					nodeID: 1,
-					connectorIndex: 2,
+					connectorIndex: 0,
 				},
 			},
 

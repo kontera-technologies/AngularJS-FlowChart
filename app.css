@@ -19,18 +19,18 @@ Generic reset.
 Styles for nodes and connectors.
 */
 
-.node-rect {
+.node-circle {
 	stroke: black;
 	stroke-width: 2;
 }
 
-.mouseover-node-rect {
+.mouseover-node-circle {
 	stroke: black;
 	stroke-width: 4;
 }
 
-.selected-node-rect {
-	stroke: red;
+.selected-node-circle {
+	stroke: black;
 	stroke-width: 3;
 }
 
@@ -54,33 +54,33 @@ Style for connections.
 }
 
 .connection-line {
-	stroke: gray;
+	stroke: black;
 	stroke-width: 4;
 	fill: transparent;
 }	
 
 .mouseover-connection-line {
-	stroke: gray;
+	stroke: black;
 	stroke-width: 6;
 	fill: transparent;
 }	
 
 .selected-connection-line {
-	stroke: red;
+	stroke: black;
 	stroke-width: 4;
 	fill: transparent;
 }	
 
 .connection-endpoint {
-	fill: gray;
+	fill: black;
 }
 
 .selected-connection-endpoint {
-	fill: red;
+	fill: black;
 }	
 
 .mouseover-connection-endpoint {
-	fill: gray;
+	fill: black;
 }
 
 /*
@@ -92,13 +92,13 @@ Style for the connection being dragged out.
 }
 
 .dragging-connection-line {
-	stroke: gray;
+	stroke: black;
 	stroke-width: 3;
 	fill: transparent;
 }	
 
 .dragging-connection-endpoint {
-	fill: gray;
+	fill: black;
 }
 
 /*
@@ -114,7 +114,7 @@ Drag selection rectangle.
 */
 
 .drag-selection-rect {
-	stroke: blue;
+	stroke: black;
 	stroke-width: 2;
 	fill: transparent;
 }
