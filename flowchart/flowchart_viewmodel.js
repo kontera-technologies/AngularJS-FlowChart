@@ -20,6 +20,12 @@ var flowchart = {
 	flowchart.nodeRadii = 50;
 
 	//
+	// Diamond horizontal distance
+	//
+	flowchart.nodeHorizontalLine = 140;
+	
+
+	//
 	// Amount of space reserved for displaying the node's name.
 	//
 	flowchart.nodeNameHeight = 40;
@@ -93,8 +99,13 @@ var flowchart = {
 
 		if (connectorDataModels) {
 			for (var i = 0; i < connectorDataModels.length; ++i) {
+				if (connectorDataModels.length == 1){
+					connector_index = 1;
+				}else{
+					connector_index = i;
+				}	
 				var connectorViewModel = 
-					new flowchart.ConnectorViewModel(connectorDataModels[i], x, flowchart.computeConnectorY(i), parentNode);
+					new flowchart.ConnectorViewModel(connectorDataModels[i], x, flowchart.computeConnectorY(connector_index), parentNode);
 				viewModels.push(connectorViewModel);
 			}
 		}
@@ -109,7 +120,13 @@ var flowchart = {
 
 		this.data = nodeDataModel;
 		this.inputConnectors = createConnectorsViewModel(this.data.inputConnectors, 0, this);
-		this.outputConnectors = createConnectorsViewModel(this.data.outputConnectors, flowchart.nodeWidth, this);
+
+		if (this.data.type == "worker"){
+			this.outputConnectors = createConnectorsViewModel(this.data.outputConnectors, flowchart.nodeWidth*2, this);
+		}else{
+			this.outputConnectors = createConnectorsViewModel(this.data.outputConnectors, flowchart.nodeHorizontalLine, this);
+		}
+
 
 		// Set to true when the node is selected.
 		this._selected = false;
@@ -149,6 +166,12 @@ var flowchart = {
 			return flowchart.nodeRadii;
                 }
 
+		//
+		// Horizontal line of sink ndoe.
+		//
+		this.horizontalLineLength = function () {
+			return flowchart.nodeHorizontalLine;
+                }
 
 		//
 		// Height of the node.

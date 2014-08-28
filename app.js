@@ -134,7 +134,7 @@ angular.module('app', ['flowChart', ])
 {
 				name: "url-content-fetcher",
 				type: "worker",
-				id: 1,
+				id: 2,
 				x: 400,
 				y: 0,
 				inputConnectors: [
@@ -163,7 +163,7 @@ angular.module('app', ['flowChart', ])
 			{
 				name: "fetcher_kontera",
 				type: "sink",
-				id: 1,
+				id: 3,
 				x: 600,
 				y: 0,
 				inputConnectors: [
@@ -192,7 +192,17 @@ angular.module('app', ['flowChart', ])
 					connectorIndex: 0,
 				},
 			},
+			{
+				source: {
+					nodeID: 1,
+					connectorIndex: 0,
+				},
 
+				dest: {
+					nodeID: 2,
+					connectorIndex: 1,
+				},
+			}
 
 		]
 	};
