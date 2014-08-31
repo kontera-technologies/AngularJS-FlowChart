@@ -131,6 +131,24 @@ angular.module('app', ['flowChart', ])
 					}
 				],
 			},
+
+			{
+				name: "sifter_display",
+				type: "sink",
+				id: 5,
+				x: 200,
+				y: 120,
+				inputConnectors: [
+					{
+						name: "A",
+					}
+				],
+				outputConnectors: [
+					{
+						name: "A",
+					}
+				],
+			},
 {
 				name: "url-content-fetcher",
 				type: "worker",
@@ -195,6 +213,28 @@ angular.module('app', ['flowChart', ])
 			{
 				source: {
 					nodeID: 1,
+					connectorIndex: 0,
+				},
+
+				dest: {
+					nodeID: 2,
+					connectorIndex: 0,
+				},
+			},
+			{
+				source: {
+					nodeID: 0,
+					connectorIndex: 1,
+				},
+
+				dest: {
+					nodeID: 5,
+					connectorIndex: 0,
+				},
+			},
+			{
+				source: {
+					nodeID: 5,
 					connectorIndex: 0,
 				},
 
